@@ -9,18 +9,18 @@ class App extends React.Component {
   }
 
   click(current) {
-    this.setState({video:current})
+    this.setState({video: current});
   }
   
   componentDidMount() {
-    this.getVideos('reason 6 tutorial')
+    this.getVideos('reason 6 tutorial');
   }
 
   getVideos(query) {
     var options = {
       key: this.props.API_KEY,
       query: query
-    }
+    };
     
     this.props.searchYouTube(options, (current) => {
       this.setState({
