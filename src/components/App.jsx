@@ -7,7 +7,29 @@ class App extends React.Component {
       videos: window.exampleVideoData
     };
   }
+
+  click(current) {
+    this.setState({video:current})
+  }
   
+  componentDidMount() {
+    this.getVideos('reason 6 tutorial')
+  }
+
+  getVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    }
+    
+    this.props.searchYouTube(options, (current) => {
+      this.setState({
+        video: current[0],
+        videos: current
+      });
+    });
+  }
+
   render() {
     return (
       <div>
@@ -16,7 +38,7 @@ class App extends React.Component {
           <VideoPlayer video={this.state.video}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.state.videos}/>
+          <VideoList videos={this.state.videos} click={this.click.bind(this)}/>
         </div>
       </div>
     );
